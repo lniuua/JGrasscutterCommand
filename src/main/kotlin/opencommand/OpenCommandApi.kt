@@ -148,7 +148,7 @@ object OpenCommandApi {
      */
     suspend fun runCommand(host: String, token: String, command: String): String {
         val ret = doRequest(host, json.encodeToString(CommandRequest(token, command)))
-        return if (ret.isNullOrEmpty()) "OK" else ret
+        return if (ret.isNullOrEmpty()) "达咩！" else ret
     }
 
     /**
@@ -169,7 +169,7 @@ object OpenCommandApi {
             throw IllegalArgumentException("命令不能为空！")
         else if (commands.size == 1) {
             val ret = doRequest(host, json.encodeToString(CommandRequest(token, commands[0])))
-            if (ret.isNullOrEmpty()) "OK" else ret
+            if (ret.isNullOrEmpty()) "达咩！" else ret
         } else {
             val msg = StringBuilder()
             var okCount = 0
@@ -177,7 +177,7 @@ object OpenCommandApi {
                 val ret = doRequest(host, json.encodeToString(CommandRequest(token, cmd)))
                 if (ret.isNullOrEmpty()) {
                     if (okCount++ == 0)
-                        msg.append("OK")
+                        msg.append("达咩！")
                 } else {
                     if (okCount > 0) {
                         if (okCount > 1) {
